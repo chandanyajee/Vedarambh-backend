@@ -1,0 +1,48 @@
+// run once to insert admin
+const bcrypt = require('bcryptjs');
+const Admin = require('./models/Admin');
+
+const createAdmin = async () => {
+  const hashedPassword = await bcrypt.hash('admin123', 10);
+  const admin = new Admin({ email: 'admin@vedarambh.com', password: hashedPassword });
+  await admin.save();
+  console.log('Admin created');
+};
+
+createAdmin();
+
+how palae aad this code 
+
+
+
+
+
+//how to used this code 
+
+
+Step 2: Backend API – Approve User by ID
+js
+Copy
+Edit
+// PUT approve any user by ID and type
+router.put('/verify/:type/:id', adminProtect, async (req, res) => {
+  const { type, id } = req.params;
+  let model;
+
+  if (type === 'teacher') model = Teacher;
+  else if (type === 'institution') model = Institution;
+  else if (type === 'student') model = Student;
+  else return res.status(400).json({ message: 'Invalid type' });
+
+  try {
+    const user = await model.findById(id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.isVerified = true;
+    await user.save();
+    res.json({ message: `${type} verified successfully` });
+  } catch (err) {
+    res.status(500).json({ message: 'Verification failed' });
+  }
+});
+
