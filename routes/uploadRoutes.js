@@ -1,13 +1,12 @@
-// uploadRoutes.js (Express.js Backend)
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import Content from '../models/UploadForm.js';
+import { bucket } from '../firebaseAdmin.js';
 
 const router = express.Router();
 
-// Ensure uploads folder exists
+// --------------------- LOCAL STORAGE ---------------------
 const uploadPath = 'uploads';
 if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
 
@@ -21,44 +20,46 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// @route   POST /api/upload
-// @desc    Upload content
+// --------------------- ROUTE ---------------------
 router.post('/', upload.single('file'), async (req, res) => {
   try {
-    const { title, description, type, category, language } = req.body;
-    const filePath = req.file.path.replace(/\\/g, '/');
+    const localFilePath = path.join(uploadPath, req.file.filename);
 
-    const content = new Content({
-      title,
-      description,
-      type,
-      category,
-      language,
-      filePath,
+    // ✅ 1. Local file saved
+    console.log('File saved locally at:', localFilePath);
+
+    // ✅ 2. Upload to Firebase Cloud
+    const blob = bucket.file(req.file.filename);
+    const blobStream = blob.createWriteStream({
+      metadata: { contentType: req.file.mimetype },
     });
 
-    await content.save();
-    res.status(201).json({ message: 'Content uploaded successfully!' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error during upload.' });
-  }
-});
+    blobStream.on('error', (err) => {
+      console.error('Cloud upload error:', err);
+    });
 
-// @route   GET /api/upload
-// @desc    Get uploaded content (filtered)
-router.get('/', async (req, res) => {
-  try {
-    const { type, category } = req.query;
-    const filter = {};
-    if (type) filter.type = type;
-    if (category) filter.category = category;
+    blobStream.on('finish', async () => {
+      const cloudUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
 
-    const contents = await Content.find(filter).sort({ createdAt: -1 });
-    res.json(contents);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error while fetching content.' });
+      // ✅ 3. (Optional) Upload to YouTube
+      // यहाँ आप YouTube Data API (v3) का code लगाएंगे
+      // अभी सिर्फ placeholder दे रहा हूँ
+      let youtubeUrl = null;
+      // youtubeUrl = await uploadToYouTube(localFilePath); <-- future function
+
+      res.status(200).json({
+        message: 'Upload successful!',
+        localPath: localFilePath,
+        cloudUrl: cloudUrl,
+        youtubeUrl: youtubeUrl, // अभी null रहेगा
+      });
+    });
+
+    blobStream.end(req.file.buffer);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Upload failed' });
   }
 });
 

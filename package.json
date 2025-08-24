@@ -16,6 +16,7 @@
     "csvtojson": "^2.0.10",
     "dotenv": "^16.5.0",
     "express": "^4.21.2",
+    "firebase-admin": "^13.4.0",
     "init": "^0.1.2",
     "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",

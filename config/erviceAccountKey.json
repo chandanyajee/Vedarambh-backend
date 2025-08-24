@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "vedarambh-a-sanatan-initiative",
+  "private_key_id": "9676bf477b6fc01fc6789129af0274ce9aeb1a36",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCmTUqlgRMBLOkX\n0Ab8XP9Wgryft3qVRdbe519AHl2f2ZiRrmb01fA57Ul3MRgViLVj1kEJ7GfblpSO\neVw6tKboALqelOdOVQlHJgcy4BNhggrSNePlhKW9udvyCqG3HSrbEFmNK005VS84\nA4CSDCbIeEiYAWoEKAaK4Ep9W3ytnSW46NubbRcleeM8Uj5mIYGKuUi6k/tlifU0\n8djIBaxgyHn5wGvp9uaFsIZwFBUG3ScVj2I1hWn7WTGzR9n2d70CtXao22GClSnv\n/CHPEEBmlDQNAUs89AcadWbr7gVM0rewxFsa0gbHW8/h976wA9UYoAAQZO0Owr8E\nLxem479BAgMBAAECggEABMp1PA9b3MzOakEz8lE7ieJ6TJ+ciHBaoFFKDS7Sw6gh\nHRFJJgSDxydu1mAzsWsezqF9fiuxUkIkRXZ5kbdil4xt0+O2Rits+P+/dVe/Ny/n\n3+Ztik8n9y9DhtWHkx7j/SubaNW2g9BQa+yt54cyFtRgQwDHbRc6GQYdHz9jeBzi\n5+i5YQ9U/CPOzoYOTzFAM/mmysddqYOmJO0QqHsdSx1V2C3YNxMlP/GllBppYzHK\nGfxVL2C5/gcINKODh0mkr7vLsdjzfz9m/6/keiRu+PPGIRIDMHQBlOnW7fjXfxZm\nbi5mBIqPDBJ69qrK3eL7rGWYkT8ysOXGx9VNeX77gQKBgQDjF5x9tppSDohHTJes\nlL5B9aMkpi267eijCEy07/TenDHXEtczEtDoy8VbJKhLkq9Leb9OPi41HPp+DH7q\n/DaLL5Diqa5BpsysWPMABKR5CpJOXQ7sWqg3dFUn+Q6cOwBEfLuVr/gq+416HXU0\nDmCb2+syNurjdrirtPEqkQ6aCwKBgQC7eKumVHSpgA5/arr/wBdl7LMNyLeMR7k7\nURddqxRcHBitAHHYtzwvNKT/IAhUoDkSazYoEr4SU2IyEaufaUg/vWHxmr/s2Th1\nCRWVlSUefljNKoD6wMcyPHEUq097hRcgJDFsEdLdEQXJrgjXjmdZ3ROWrzQUbau/\nBgKhUOOnYwKBgQDHe3kzERF0XWGmyAhASJTsWftKeVOYbd46QFMpadO/LJO3asxx\nB+lNZZpimsvfPuYPNc4vy/1JGMCNsypV/uFm2Iy8HvN8pioKh0RGUs2rqfalMaen\nRWeY9u7K40PLRyTQBIW/Usl78GbxyyimZq7EmqV7AbTJxQMpihODIdMiywKBgQCY\n1rpqcnRiNCqdqrAmDb+Fs0IPPNKXpWnYeDYqgW2p4qYjdTdbzZddjPfvn3frNm0R\nHSMb7JvVaPGnjEx1PGpQvN97EATk3ftvPya/usZ2Y9+V9M8On9hGloxCo5+7Pjgq\nVheM2cMlw9kKIb7HriuIUfrEYLZ+6SKaLBY82iufrQKBgG/WTuXOvCtx5q/qZR5H\naRPKARBpQzSUdvU2Aq4l7/iSgWtWYeWq5w7Ez+omI2ymZwKt7tpE1eXunMjgh/Ao\n9OIlkzLo3APfy+YjC8bXBpaGjEaayNwl0meq2nyoEgh59ZAxVJzYhuatD0eIWDYY\nSLveUMekaT5AzDGgMWqBxbhl\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@vedarambh-a-sanatan-initiative.iam.gserviceaccount.com",
+  "client_id": "111434121180832064932",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40vedarambh-a-sanatan-initiative.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
