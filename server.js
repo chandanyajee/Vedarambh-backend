@@ -57,8 +57,9 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true 
+  origin: ["https://vedarambhin.vercel.app",'http://localhost:3000'], // Vercel frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 connectDB();
 
