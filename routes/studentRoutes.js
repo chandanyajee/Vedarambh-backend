@@ -5,7 +5,8 @@ import jwt from 'jsonwebtoken';
 // import protect from '../middleware/studentAuth.js';
 import Batch from '../models/Batch.js';
 import studentProtect from '../middleware/studentAuth.js';
-import authMiddleware from "../middleware/teacherAuth.js";
+// import authMiddleware from "../middleware/teacherAuth.js";
+import { authMiddleware } from "../middleware/auth.js";  // 👈 ye line add karna
 
 
 
@@ -128,6 +129,8 @@ router.put('/profile', studentProtect, async (req, res) => {
 
 
 import Course from  '../models/Course.js'
+// import { Course } from "../models/Course.js";
+
 
 // const Course = require('../models/Course');
 // const Student = require('../models/Student');
@@ -244,6 +247,7 @@ router.get('/course/public', async (req, res) => {
   const courses = await Course.find({ status: 'published' });
   res.json(courses);
 });
+
 
 // ENROLL in Course
 router.post('/enroll/:courseId', authMiddleware, async (req, res) => {

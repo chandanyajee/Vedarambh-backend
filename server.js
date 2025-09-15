@@ -4,8 +4,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import connectDB from './config/db.js';
+import rateLimit from 'express-rate-limit'
+// const rateLimit = require('');
 
 
+import reelsRoutes from './routes/reels.routes.js';
 
 
 // import teacherRoutes from './routes/teacherRoutes.js';
@@ -23,6 +26,7 @@ import shortsRoutes from './routes/shortsRoutes.js';
 import libraryRoutes from './routes/libraryRoutes.js';
 
 import teacherRoutes from './routes/teacherRoutes.js';
+// import reelsRoutes from './routes/reels.routes.js';
 import panchangRoute from './routes/panchangRoute.js';
 
 import ResultRoute from './routes/results.js';
@@ -35,6 +39,7 @@ import studentIDRoutes from './routes/studentIDRoutes.js';
 
 import studentIDFRoutes from './routes/studentIDRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+// import reelsRoutes from './routes/reels.routes.js';
 
 
 
@@ -57,10 +62,14 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-  origin: ["https://vedarambhin.vercel.app",'http://localhost:3000'], // Vercel frontend
+  origin: ['http://localhost:3000',"https://vedarambhin.vercel.app"], // Vercel frontend
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+const limiter = rateLimit({ windowMs: 60 * 1000, max: 120 });
+app.use(limiter);
+
 connectDB();
 
 app.use(express.json());
@@ -77,6 +86,9 @@ app.use('/uploads', express.static('uploads')); // to serve videos
 // ⭐ ADD THIS LINE to serve files from uploads folder
 app.use('/uploads', express.static(path.join(path.resolve(), 'uploads')));
 
+
+
+
 // server.js 
 
 app.use('/uploads', express.static(path.join(path.resolve(), 'uploads')));
@@ -84,13 +96,24 @@ app.use('/api/upload', uploadRoutes);
 
 // Middleware
 
+// // rell
+// app.get('/api/health', (_req, res) => res.json({ ok: true }));
+// app.use('/api/reels', require('./routes/reels.routes'));
+
+
+
+// Health check
+app.get('/api/health', (_req, res) => res.json({ ok: true }));
+
+// Reels route (corrected)
+app.use('/api/reels', reelsRoutes);
 
 
 
 
 app.use(cors()); // ✅ Required for frontend (React) to access backend
-
-// app.use(cors()); // ✅ Add this line
+app.use(express.json());
+app.use("/uploads", express.static(path.join(path.resolve(), "uploads"))); // serve static files
 
 
 // ✅ Test route for root
@@ -98,8 +121,14 @@ app.get('/', (req, res) => {
   res.send('VedArambh API is working!');
 });
 
+// Middleware
 
 // Routes
+
+// Routes
+
+app.use("/api/reels", reelsRoutes);
+
 app.use('/api/students', studentIDRoutes);
 
 app.use('/api/panchang', panchangRoute);
@@ -131,18 +160,7 @@ mongoose
   })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
-  
-
-
-
-
-
-
-
-
-
-  
-  
+    
   
   
   // Serve static files
@@ -153,3 +171,89 @@ mongoose
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
+// import express from 'express';
+// import mongoose from 'mongoose';
+// import cors from 'cors';
+// import dotenv from 'dotenv';
+// import path from 'path';
+// import connectDB from './config/db.js';
+// import rateLimit from 'express-rate-limit';
+// import { fileURLToPath } from 'url';
+
+// // Routes import
+// import reelsRoutes from './routes/reels.routes.js';
+// import studentRoutes from './routes/studentRoutes.js';
+// import courseRoutes from './routes/courseRoutes.js';
+// import paymentRoutes from './routes/paymentRoutes.js';
+// import adminRoutes from './routes/adminRoutes.js';
+// import publicRoutes from './routes/publicRoutes.js';
+// import batchRoutes from './routes/batchRoutes.js';
+// import institutionRoutes from './routes/institutionRoutes.js';
+// import shortsRoutes from './routes/shortsRoutes.js';
+// import libraryRoutes from './routes/libraryRoutes.js';
+// import teacherRoutes from './routes/teacherRoutes.js';
+// import panchangRoute from './routes/panchangRoute.js';
+// import ResultRoute from './routes/results.js';
+// import videoLibraryRoutes from './routes/videoLibraryRoutes.js';
+// import studentIDRoutes from './routes/studentIDRoutes.js';
+// import uploadRoutes from './routes/uploadRoutes.js';
+
+
+// // __dirname fix for ES Modules
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// dotenv.config();
+// const app = express();
+
+// // CORS
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'https://vedarambhin.vercel.app'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true,
+// }));
+
+// // Rate limit
+// const limiter = rateLimit({ windowMs: 60 * 1000, max: 120 });
+// app.use(limiter);
+
+// // DB connect
+// connectDB();
+
+// // Middleware
+// app.use(express.json());
+
+// // Static files
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/api/upload', uploadRoutes);
+
+// // Health check
+// app.get('/api/health', (_req, res) => res.json({ ok: true }));
+
+// // Routes
+// app.use('/api/reels', reelsRoutes);
+// app.use('/api/students', studentIDRoutes);
+// app.use('/api/panchang', panchangRoute);
+// app.use('/api/Result', ResultRoute);
+// app.use('/api/courses', courseRoutes);
+// app.use('/api/student', studentRoutes);
+// app.use('/api/teacher', teacherRoutes);
+// app.use('/api/payment', paymentRoutes);
+// app.use('/api/admin', adminRoutes);
+// app.use('/api/public', publicRoutes);
+// app.use('/api', batchRoutes);
+// app.use('/api/institutions', institutionRoutes);
+// app.use('/api/shorts', shortsRoutes);
+// app.use('/api/library', videoLibraryRoutes); // Video library ke liye
+
+// // MongoDB Connection
+// mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/vedarambh', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+//   .then(() => console.log('MongoDB connected'))
+//   .catch((err) => console.error('MongoDB connection error:', err));
+
+// // Start server
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

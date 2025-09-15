@@ -4,6 +4,7 @@ const router = express.Router();
 import multer from "multer";
 import ShortVideo from "../models/ShortVideo.js";
 import auth from '../middleware/authMiddleware.js'
+// import { authMiddleware } from "../middleware/auth.js";  // 👈 ye line add karo
 import path from "path";
 
 

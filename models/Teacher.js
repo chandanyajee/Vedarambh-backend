@@ -1,12 +1,14 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const teacherSchema = new mongoose.Schema({
-  name: String,
-  email: { type: String, unique: true },
-  password: String,
+  name: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
   qualification: String,
   experience: String,
-  // status: { type: String, default: 'pending' }
 });
 
-export default mongoose.model('Teacher', teacherSchema);
+const Teacher = mongoose.model("Teacher", teacherSchema);
+
+// ✅ Explicit default export
+export default Teacher;

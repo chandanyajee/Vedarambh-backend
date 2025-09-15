@@ -1,14 +1,14 @@
-import mongoose from 'mongoose';
+// models/institutionModel.js
+import mongoose from "mongoose";
 
 const institutionSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  address: { type: String },
+  address: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
   phone: { type: String },
-  approved: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
-const Institution = mongoose.model('Institution', institutionSchema);
-export default Institution;
+const Institution = mongoose.model("Institution", institutionSchema);
+
+export default Institution;   // ✅ ab default export ho gaya
